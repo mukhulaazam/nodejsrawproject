@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "dependencies": {
+    "global": "^4.4.0",
+    "nodemon": "^2.0.20"
+  }
+}

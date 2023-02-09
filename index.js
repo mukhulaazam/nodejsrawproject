@@ -1,4 +1,5 @@
 const http = require('http');
+const url = require('url');
 // module scaffolding
 const app ={}
 
@@ -17,6 +18,9 @@ app.createServer = () => {
 
 // handle request response
 app.handleReqRes = (req, res) => {
+    const parsedUrl = url.parse(req.url, true)
+    const path = parsedUrl.pathname
+    console.log('url=>>',parsedUrl)
     res.end('Hola, From the Uptime Monitoring App')
 }
 
