@@ -20,7 +20,12 @@ app.createServer = () => {
 app.handleReqRes = (req, res) => {
     const parsedUrl = url.parse(req.url, true)
     const path = parsedUrl.pathname
+    const method = req.method.toLowerCase()
+    const queryStringObj = parsedUrl.query
+    const headersObj = req.headers
+
     console.log('url=>>',parsedUrl)
+    console.log('headers =>>', headersObj)
     res.end('Hola, From the Uptime Monitoring App')
 }
 
