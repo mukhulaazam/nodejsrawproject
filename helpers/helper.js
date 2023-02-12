@@ -29,15 +29,7 @@ helpers.helperReqRes = (req, res) => {
 
     const chosenHandler = routes[trimmedPath] ? routes[trimmedPath] : notFoundHandler
 
-    chosenHandler(reqProperties, (statusCode, payload) => {
-        statusCode = typeof statusCode === 'number' ? statusCode : 500
-        payload = typeof payload === 'object' ? payload : {}
-
-        const payloadString = JSON.stringify(payload)
-
-        res.writeHead(statusCode)
-        res.end(payloadString)
-    })
+    
 
     req.on('data', (buffer) => {
         realData += decoder.write(buffer)
@@ -45,6 +37,17 @@ helpers.helperReqRes = (req, res) => {
 
     req.on('end', () => {
         realData += decoder.end()
+        
+        chosenHandler(reqProperties, (statusCode, payload) => {
+            statusCode = typeof statusCode === 'number' ? statusCode : 500
+            payload = typeof payload === 'object' ? payload : {}
+
+            const payloadString = JSON.stringify(payload)
+
+            res.writeHead(statusCode)
+            res.end(payloadString)
+        })
+
         console.log(realData)
         res.end('Hola!, From the Uptime Monitoring App & I am connected to the helper.')
     })
