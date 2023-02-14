@@ -6,9 +6,14 @@ const createData = require('./lib/data');
 
 // module scaffolding
 const app = {}
+// @des :: Create and write data to a file
+// createData.create('createTest', 'createFileStore', { name: 'Mamun', age: 25 }, (err) => {
+//     console.log('error was:',err)
+// })
 
-createData.create('createTest', 'createFileStore', { name: 'Mamun', age: 25 }, (err) => {
-    console.log('error was:',err)
+// @des :: Read data from a file
+createData.read('createTest', 'createFileStore', (err, data) => {
+    console.log('error was:',err, 'and data was:', data)
 })
 
 // create server
