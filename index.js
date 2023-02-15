@@ -12,8 +12,13 @@ const app = {}
 // })
 
 // @des :: Read data from a file
-createData.read('createTest', 'createFileStore', (err, data) => {
-    console.log('error was:',err, 'and data was:', data)
+// createData.read('createTest', 'createFileStore', (err, data) => {
+//     console.log('error was:',err, 'and data was:', data)
+// })
+
+// @des :: Update data inside a file
+createData.update('createTest', 'createFileStore', { name: 'Mamun', age: 25, job: 'Software Engineer' }, (err) => {
+    console.log('error was:',err)
 })
 
 // create server
