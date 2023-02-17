@@ -1,7 +1,9 @@
 const { aboutHandler } = require('./handlers/routeHandler/aboutRouteHandler')
+const { userHandler } = require('./handlers/routeHandler/userRouteHandler')
 
 const routes = {
-    'about': aboutHandler
+    'about': aboutHandler,
+    'user': userHandler
 }
 
 module.exports = routes

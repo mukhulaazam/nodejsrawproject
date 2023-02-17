@@ -17,14 +17,14 @@ const app = {}
 // })
 
 // @des :: Update data inside a file
-createData.update('createTest', 'createFileStore', { name: 'Mamun', age: 25, job: 'Software Engineer' }, (err) => {
-    console.log('error was:',err)
-})
+// createData.update('createTest', 'createFileStore', { name: 'Mamun', age: 25, job: 'Software Engineer' }, (err) => {
+//     console.log('error was:',err)
+// })
 
 // @des :: delete data inside a file
-createData.delete('createTest', 'createFileStore', { name: 'Mamun', age: 25, job: 'Software Engineer' }, (err) => {
-    console.log('error was:',err)
-})
+// createData.delete('createTest', 'createFileStore', { name: 'Mamun', age: 25, job: 'Software Engineer' }, (err) => {
+//     console.log('error was:',err)
+// })
 
 // create server
 app.createServer = () => {
