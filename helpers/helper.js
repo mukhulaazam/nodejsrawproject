@@ -37,6 +37,8 @@ helpers.helperReqRes = (req, res) => {
 
     req.on('end', () => {
         realData += decoder.end()
+
+        reqProperties.body =realData
         
         chosenHandler(reqProperties, (statusCode, payload) => {
             statusCode = typeof statusCode === 'number' ? statusCode : 500
