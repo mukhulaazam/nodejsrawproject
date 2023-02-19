@@ -45,16 +45,14 @@ helpers.helperReqRes = (req, res) => {
             const payloadString = JSON.stringify(payload)
 
             res.setHeader('Content-Type', 'application/json')
+
             res.writeHead(statusCode)
             res.end(payloadString)
         })
 
-        console.log(realData)
-        res.end('Hola!, From the Uptime Monitoring App & I am connected to the helper.')
+        // console.log(realData)
+        // res.end('Hola!, From the Uptime Monitoring App & I am connected to the helper.')
     })
-
-    // console.log('url=>>',parsedUrl)
-    // console.log('headers =>>', headersObj)
 }
 
 module.exports = helpers
