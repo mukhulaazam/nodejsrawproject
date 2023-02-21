@@ -26,6 +26,11 @@ handler._users.post = (reqProperties, callback) => {
     if (userName && password && mobile) {
         data.read('users', userName, (err, user) => {
             if (err) {
+                const userObj = {
+                    userName,
+                    password: makeHash(password),
+                    mobile,
+                }
             } else {
                 error : 'User already exists'
             }
