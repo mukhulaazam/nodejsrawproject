@@ -1,3 +1,5 @@
+const data = require('../../lib/data');
+const { makeHash } = require('../../utils/utilities');
 const handler = {};
 
 handler.userHandler = (reqProperties, callback) => {
@@ -15,7 +17,26 @@ handler._users.get = (reqProperties, callback) => {
         message: 'This is a get request',
     });
 };
-handler._users.post = (reqProperties, callback) => { };
+handler._users.post = (reqProperties, callback) => {
+    const userName = typeof (reqProperties.body.userName) === 'string' && reqProperties.body.userName.trim().length > 0 ? reqProperties.body.userName : false;
+
+    const password = typeof (reqProperties.body.password) === 'string' && reqProperties.body.password.trim().length > 0 ? reqProperties.body.password : false;
+    
+    const mobile = typeof (reqProperties.body.mobile) === 'string' && reqProperties.body.mobile.trim().length > 0 ? reqProperties.body.mobile : false;
+    if (userName && password && mobile) {
+        data.read('users', userName, (err, user) => {
+            if (err) {
+            } else {
+                error : 'User already exists'
+            }
+        });
+    } else {
+        callback(422, {
+            message: 'You have a problem in your request',
+        });
+    }
+};
 handler._users.put = (reqProperties, callback) => { };
 handler._users.delete = (reqProperties, callback) => { };
+
 module.exports = handler;
