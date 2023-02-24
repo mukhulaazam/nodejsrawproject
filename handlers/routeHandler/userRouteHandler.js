@@ -13,9 +13,7 @@ handler.userHandler = (reqProperties, callback) => {
 handler._users = {};
 // @des :: Get a or all user
 handler._users.get = (reqProperties, callback) => {
-    callback(200, {
-        message: 'This is a get request',
-    });
+    const userName = typeof (reqProperties.queryStringObj) === 'phone' && reqProperties.queryStringObj.trim().length > 0 ? reqProperties.queryStringObj : false;
 };
 // @des :: Create a new user
 handler._users.post = (reqProperties, callback) => {
