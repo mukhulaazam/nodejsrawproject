@@ -1,5 +1,6 @@
 const data = require('../../lib/data');
 const { makeHash } = require('../../utils/utilities');
+const { parseJsonToObject } = require('../../utils/utilities');
 const handler = {};
 
 handler.userHandler = (reqProperties, callback) => {
@@ -11,9 +12,28 @@ handler.userHandler = (reqProperties, callback) => {
     }
 }
 handler._users = {};
+
 // @des :: Get a or all user
 handler._users.get = (reqProperties, callback) => {
-    const userName = typeof (reqProperties.queryStringObj) === 'phone' && reqProperties.queryStringObj.trim().length > 0 ? reqProperties.queryStringObj : false;
+    const userName = typeof (reqProperties.queryStringObj.userName) === 'string' && reqProperties.queryStringObj.userName.trim().length > 0 ? reqProperties.queryStringObj.userName : false;
+
+    if (userName) {
+        data.read('users', userName, (err, u) => {
+            const user = { ...parseJsonToObject(u)};
+            if (!err && user) {
+                delete user.password;
+                callback(200, user);
+            } else {
+                callback(404, {
+                    error: 'User not found',
+                });
+            }
+        });
+    } else {
+        callback(422, {
+            message: 'You have a problem in your request',
+        });
+    }
 };
 // @des :: Create a new user
 handler._users.post = (reqProperties, callback) => {
@@ -54,7 +74,14 @@ handler._users.post = (reqProperties, callback) => {
     }
 };
 // @des :: Update a user
-handler._users.put = (reqProperties, callback) => { };
+handler._users.put = (reqProperties, callback) => {
+    const userName = typeof (reqProperties.body.userName) === 'string' && reqProperties.body.userName.trim().length > 0 ? reqProperties.body.userName : false;
+
+    const password = typeof (reqProperties.body.password) === 'string' && reqProperties.body.password.trim().length > 0 ? reqProperties.body.password : false;
+
+    const mobile = typeof (reqProperties.body.mobile) === 'string' && reqProperties.body.mobile.trim().length > 0 ? reqProperties.body.mobile : false;
+
+};
 // @des :: Delete a user
 handler._users.delete = (reqProperties, callback) => { };
 
