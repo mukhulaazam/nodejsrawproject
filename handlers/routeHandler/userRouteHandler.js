@@ -81,6 +81,22 @@ handler._users.put = (reqProperties, callback) => {
 
     const mobile = typeof (reqProperties.body.mobile) === 'string' && reqProperties.body.mobile.trim().length > 0 ? reqProperties.body.mobile : false;
 
+    if (userName) {
+        if (userName || password || mobile) {
+            data.read('users', userName, (err, u) => {
+                const userData = { ...parseJsonToObject(u) };
+                if (!err && userData) {
+        } else {
+            callback(422, {
+                message: 'nothing made changes for made update',
+            });
+        }
+    } else {
+        callback(422, {
+            message: 'User name is not match with server data',
+        });
+    }
+
 };
 // @des :: Delete a user
 handler._users.delete = (reqProperties, callback) => { };
